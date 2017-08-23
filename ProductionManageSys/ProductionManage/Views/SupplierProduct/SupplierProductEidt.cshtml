@@ -1,0 +1,60 @@
+﻿@using Domain.Model;
+@model SupplierProduct
+<div class="row">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+        <div class="widget am-cf">
+            <div class="widget-head am-cf">
+                <div class="widget-title am-fl">编辑供应商产品</div>
+                <div class="widget-function am-fr">
+                    <a href="javascript:;" class="am-icon-cog"></a>
+                </div>
+            </div>
+            <div class="widget-body am-fr">
+                @using (Html.BeginForm("Save", "SupplierProduct", FormMethod.Post, new { @class = "am-form tpl-form-line-form" }))
+                {
+                    @Html.HiddenFor(o => o.ProductId, new { Value = Model?.ProductId })
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-u-sm-3 am-form-label">供应商</label>
+                        <div class="am-u-sm-9">
+                           @Html.DropDownListFor(t => t.SupplierId,
+                                ViewBag.GetSupplierList as IEnumerable<SelectListItem>,
+                                 new Dictionary<string, object>() { { "style", "background:#4b5357" }, { "data-am-selected", "{searchBox: 1}" } })
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-u-sm-3 am-form-label">产品名称</label>
+                        <div class="am-u-sm-9">
+                            @Html.TextBoxFor(o => o.ProductName, new { @class = "tpl-form-input", placeholder = "请输入产品名称" })
+                        </div>
+                    </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">单价</label>
+                            <div class="am-u-sm-9">
+                                <input class="input_number" type="text" min="0" id="Price" name="Price"  placeholder = "请输入单价" value="@(Model?.Price)" onkeyup="ValidNum(this);"/>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">备注</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Remark, new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("Index")'">返回</button>
+                            </div>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+      $(function(){
+          if("@ViewBag.Msg"!="")
+              layer.msg("@ViewBag.Msg");
+      });
+    
+</script>
+

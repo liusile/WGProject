@@ -1,0 +1,64 @@
+﻿@using Domain.Model;
+@model Product
+<div class="row">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+        <div class="widget am-cf">
+            <div class="widget-head am-cf">
+                <div class="widget-title am-fl">编辑产品</div>
+                <div class="widget-function am-fr">
+                    <a href="javascript:;" class="am-icon-cog"></a>
+                </div>
+            </div>
+            <div class="widget-body am-fr">
+                @using (Html.BeginForm("Save", "Product", FormMethod.Post, new { @class = "am-form tpl-form-line-form" }))
+                {
+                    @Html.HiddenFor(o => o.ProductId, new { Value = Model?.ProductId })
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-u-sm-3 am-form-label">产品名称</label>
+                        <div class="am-u-sm-9">
+                            @Html.TextBoxFor(o => o.ProductName, new { @class = "tpl-form-inpu", placeholder = "", @readonly = "true" })
+                        </div>
+                    </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">最小警界线</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.WaringMin, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "请输入最小警界线" }, { "onkeyup", "ValidNum(this);" } })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">最大警界线</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.WaringMax, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "请输入最大警界线" }, { "onkeyup", "ValidNum(this);" } })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">存放位置</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Location, new { @class = "tpl-form-input", placeholder = "请输入位置" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">说明</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Remark, new { @class = "tpl-form-input", placeholder = "请输入说明" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("Index")'">返回</button>
+                            </div>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+      $(function(){
+          if("@ViewBag.Msg"!="")
+              layer.msg("@ViewBag.Msg");
+       });
+</script>
+<script src="~/scripts/Upload.js"></script>
+

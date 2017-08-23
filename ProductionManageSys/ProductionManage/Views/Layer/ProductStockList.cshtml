@@ -1,0 +1,111 @@
+﻿
+@using Domain.Model;
+@using Common;
+
+@model PageInfo<Product>
+@{
+    Layout = "~/Views/Shared/_LayerLayout.cshtml";
+    var viewName = "ProductList";
+    var rowStyle = "odd gradeX";
+}
+<div class="row">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12" id="divsubPage">
+        <div class="widget am-cf">
+            <div class="widget-body  am-fr">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                    <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                        <input class="am-form-field " type="text" id="txt_search" placeholder="请输入产品名称...">
+                        <span class="am-input-group-btn">
+                            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" onclick="Search()" type="button"></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="am-u-sm-12">
+                    <table class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r" width="100%">
+                        <thead>
+                            <tr>
+                                <th>产品名称</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>备注</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Model.List)
+                            {
+                                <tr class=@rowStyle>
+                                    <td>@row.ProductName</td>
+                                    <td>@row.Price</td>
+                                    <td>@row.SumNum</td>
+                                    <td>@row.Remark</td>
+                                    <td>
+                                        <div class="tpl-table-black-operation ">
+                                            <a href="#" onclick="ok(@Common.JsonHelper.JsonHelper.ToJson(row))" style="color:#4aaa4a;border-color:#4aaa4a">
+                                                <i class="am-icon-pencil"></i> 确定
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                rowStyle = "even gradeC";
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="am-u-lg-12 am-cf">
+                    <div class="am-fr">
+                        <ul class="am-pagination tpl-pagination">
+                            <li>
+                                <a href=@Url.Action(viewName, new { p = 1,searchFild=ViewBag.searchFild })>«</a>
+                            </li>
+                            @for (int i = Model.Index - 4; i < Model.Index; i++)
+                            {
+                                if (i > 0)
+                                {
+                                    <li><a href=@Url.Action(viewName, new { p = i,searchFild=ViewBag.searchFild  })>@i</a></li>
+                                }
+                            }
+                            <li class="am-active"><a href="#">@Model.Index</a></li>
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (Model.Index + i <= Math.Ceiling((decimal)Model.Count / Model.PageSize))
+                                {
+                                    <li><a href=@Url.Action(viewName, new { p = Model.Index + i,searchFild=ViewBag.searchFild  })>@(@Model.Index + @i)</a></li>
+                                }
+                            }
+                            <li>
+                                <a href=@Url.Action(viewName, new { p = Math.Ceiling((decimal)Model.Count / Model.PageSize),searchFild=ViewBag.searchFild  })>»</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.iframeAuto(index);
+
+      });
+    function ok(products) {
+
+        parent.$("#hiddenProducts").val(JSON.stringify(products));
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+      }
+</script>
+<script src="~/scripts/amazeui.datatables.min.js"></script>
+@section scripts{
+
+    function Search(){
+
+    var value = $("#txt_search").val();
+
+    location.href='@Url.Action("ProductStockList")'+'?searchFild='+value+"&filter=@ViewBag.filter";
+
+    }
+}
+
+

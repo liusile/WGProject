@@ -1,0 +1,204 @@
+﻿@using Domain.Model;
+@using ProductionManage.Controllers;
+@model ProductPutOutOrder
+@{
+    var viewName = "Index";
+}
+<style>
+    .theme-black .tpl-table-black tbody > tr > td {
+        border: 0;
+    }
+</style>
+@using (Html.BeginForm("PutSave", "ProductPutOutOrder", FormMethod.Post, new { @class = "am-form tpl-form-line-form" }))
+{
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">单头</div>
+                    <div class="widget-function am-fr">
+
+                    </div>
+                </div>
+                <div class="widget-body am-fr">
+                    <div style="padding:5px">
+                        <div class="am-form-group">
+                            @Html.HiddenFor(o => o.ID)
+                            <label for="user-name" class="am-u-sm-1 am-form-label ">入库单号</label>
+                            <div class="am-u-sm-4">
+                                @Html.TextBoxFor(o => (o.ProductOrderNo), new { @class = "tpl-form-inpu", placeholder = "", @readonly = "true" })
+                            </div>
+                            <label for="user-name" class="am-u-sm-2 am-form-label">总金额</label>
+                            <div class="am-u-sm-5">
+                                @Html.TextBoxFor(o => o.SumPrice, new { @class = "", placeholder = "", disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-1 am-form-label">订单日期</label>
+                            <div class="am-u-sm-4">
+                                @Html.TextBoxFor(o => o.ProductPutOrderDate, new Dictionary<string, object> { { "class", "am-form-field tpl-form-no-bg am-margin-top-xs" }, { "placeholder", "请选择订单日期" }, { "data-am-datepicker", "" }, { "readonly", "true" }, { "style", "cursor:default" } })
+                            </div>
+                            <label for="user-name" class="am-u-sm-2 am-form-label">摘要</label>
+                            <div class="am-u-sm-5">
+                                @Html.TextBoxFor(o => o.Content, new { @class = "tpl-form-input", placeholder = "请输入摘要" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                            <div class="am-u-sm-11">
+                                @Html.TextBoxFor(o => o.Remark, new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">单身</div>
+                    <div class="widget-function am-fr">
+                        <a href="javascript:;" class="am-icon-plus" onclick="AddRow()">添加</a>
+                    </div>
+                </div>
+                <div class="widget-body am-fr">
+
+                    <div class="am-u-sm-12">
+                        <table class="am-table am-table-compact  tpl-table-black " id="tb">
+                            <thead>
+                                <tr>
+
+                                    <th>产品名称</th>
+                                    <th>单价</th>
+                                    <th>数量</th>
+                                    <th>总金额</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model?.ProductOrderDetail != null)
+                                {
+                                    for (int i = 0; i < Model.ProductOrderDetail.Count; i++)
+                                    {
+                                        <tr class="odd gradeX">
+                                            <td>@Html.TextBoxFor(o => Model.ProductOrderDetail[i].ProductName, new { @class = "tpl-form-input", placeholder = "请选择/输入产品" })</td>
+                                            <td>@Html.TextBoxFor(o => Model.ProductOrderDetail[i].Price, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "onkeyup", "ValidNum(this);Cal(this)" } })</td>
+                                            <td>@Html.TextBoxFor(o => Model.ProductOrderDetail[i].Num, new { @class = "input_number", placeholder = "请输入数量", onkeyup = "ValidNum(this,true);Cal(this)" })</td>
+                                            <td>@Html.TextBoxFor(o => Model.ProductOrderDetail[i].SumPrice, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "onkeyup", "ValidNum(this);" }, { "readonly", "true" } })</td>
+                                            <td>@Html.TextBoxFor(o => Model.ProductOrderDetail[i].Remark, new { @class = "tpl-form-input", placeholder = "请输入备注" })</td>
+                                            <td>
+                                                <div class="tpl-table-black-operation">
+                                                    <a href="#" class="tpl-table-black-operation-del" onclick="openWin(this)">
+                                                        <i class="am-icon-trash"></i> 选择
+                                                    </a>
+                                              
+                                                    <a href="#" class="tpl-table-black-operation-del" onclick="DelRow(this)">
+                                                        <i class="am-icon-trash"></i> 删除
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-u-sm-7 am-u-sm-push-5">
+                <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("PutIndex")'">返回</button>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenProducts" />
+    </div>
+}
+<script type="text/javascript">
+      $(function(){
+          if("@ViewBag.Msg"!="")
+              layer.msg("@ViewBag.Msg");
+
+
+      });
+    function AddRow() {
+        var length = $("#tb tbody tr").length;
+        var data="<tr class=\"odd gradeX\">";
+        data += "<td><input class=\"tpl-form-input\" id=\"ProductOrderDetail_" + length + "__ProductName\" name=\"ProductOrderDetail[" + length + "].ProductName\" placeholder=\"请选择/输入产品\" type=\"text\" value=\"\"></td>";
+        data += "<td><input class=\"tpl-form-input\" data-val=\"true\" data-val-number=\"字段 Price 必须是一个数字。\" data-val-required=\"Price 字段是必需的。\" id=\"ProductOrderDetail_" + length + "__Price\" name=\"ProductOrderDetail[" + length + "].Price\" onkeyup=\"ValidNum(this);Cal(this)\" placeholder=\"\" type=\"text\" value=\"\"></td>";
+        data += "<td><input class=\"input_number\" data-val=\"true\" data-val-number=\"字段 Num 必须是一个数字。\" data-val-required=\"Num 字段是必需的。\" id=\"ProductOrderDetail_" + length + "__Num\" name=\"ProductOrderDetail[" + length + "].Num\" onkeyup=\"ValidNum(this,true);Cal(this)\" placeholder=\"请输入数量\" type=\"text\" value=\"\"></td>";
+        data += "<td><input class=\"tpl-form-input\" data-val=\"true\" data-val-number=\"字段 SumPrice 必须是一个数字。\" data-val-required=\"SumPrice 字段是必需的。\" id=\"ProductOrderDetail_" + length + "__SumPrice\" name=\"ProductOrderDetail[" + length + "].SumPrice\" onkeyup=\"ValidNum(this);\" placeholder=\"\" readonly=\"true\" type=\"text\" value=\"\"></td>";
+        data += "<td><input class=\"tpl-form-input\" id=\"ProductOrderDetail_" + length + "__Remark\" name=\"ProductOrderDetail[" + length + "].Remark\" placeholder=\"请输入备注\" type=\"text\" value=\"\"></td>";
+        data+="<td>";
+        data+="<div class=\"tpl-table-black-operation\">";
+        data+="<a href=\"#\" class=\"tpl-table-black-operation-del\" onclick=\"openWin(this)\">";
+        data+="<i class=\"am-icon-trash\"></i> 选择";
+        data+="</a>";                                          
+        data+="<a href=\"#\" class=\"tpl-table-black-operation-del\" onclick=\"DelRow(this)\">";
+        data+="<i class=\"am-icon-trash\"></i> 删除";
+        data+="</a>";
+        data+="</div>";
+        data+="</td>";
+        data+="</tr>";
+        $("#tb tbody").append(data);
+    }
+    function DelRow(obj) {
+        $(obj).parents("tr").find("[name*='ProductName']").val("");
+        $(obj).parents("tr").find("[name*='Price']").val("0");
+        $(obj).parents("tr").attr("style","display:none");
+        CalAll();
+    }
+    function Cal(obj) {
+        var num = $(obj).parents("tr").find("[name*='Num']").val();
+        var PurchaseOrderDetail_Price = $(obj).parents("tr").find("[name*='Price']").val();
+
+        $(obj).parents("tr").find("[name*='SumPrice']").val(Math.round(parseInt(num) * parseFloat(PurchaseOrderDetail_Price)*100)/100);
+        CalAll();
+    }
+    function CalAll() {
+        var sum = 0;
+        $.each($("#tb tbody tr"), function (index, data) {
+            var PurchaseOrderDetail_Price = $(data).find("[name*='Price']").val();
+            var PurchaseOrderDetail_PurchaseNum = $(data).find("[name*='Num']").val();
+
+            sum = Math.round((sum + parseFloat(PurchaseOrderDetail_Price) * parseInt(PurchaseOrderDetail_PurchaseNum))* 100)  / 100;
+        });
+        $("#SumPrice").val(sum);
+    }
+    function openWin(obj) {
+        var productNameArr = $("#tb tbody tr").find("[name*='ProductName']");
+        var filter = "";
+        $.each(productNameArr, function (index, data) {
+            filter += $(data).val() + "|";
+        });
+        layer.open({
+            type: 2,
+            title: '选择产品',
+            shadeClose: true,
+            id: "main",
+            shade: true,
+            offset: '100px',
+            shade: 0.8,
+            area: '80%',
+            content: ['@Url.Action("ProductStockList", "Layer")' + "?SupplierName=''&filter=" + filter, 'no'],
+            end: function () {
+
+                var hiddenProdcuts = $("#hiddenProducts").val();
+                if (hiddenProdcuts == "") return;
+                $("#hiddenProducts").val("");
+                var data = JSON.parse(hiddenProdcuts);
+
+                $(obj).parents("tr").find("[name*='ProductName']").val(data.ProductName).attr("readonly","true");
+                $(obj).parents("tr").find("[name*='Price']").val(data.Price).attr("readonly", "true");;
+  
+                CalAll();
+            }
+        });
+    }
+</script>
+

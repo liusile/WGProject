@@ -1,0 +1,287 @@
+﻿@using Domain.Model;
+@using ProductionManage.Controllers;
+@model IList<BOM>
+@{
+    var viewName = "Index";
+}
+<style>
+    .theme-black .tpl-table-black tbody > tr > td {
+        border: 0;
+    }
+
+    .ztree li a {
+    }
+</style>
+<link rel="stylesheet" href="~/Content/Css/zTreeStyle.css">
+@using (Html.BeginForm("Save", "Purcahse", FormMethod.Post, new { @class = "am-form tpl-form-line-form" }))
+{
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">编辑生产BOM</div>
+                    <div class="widget-function am-fr" style="font-size:8px">
+                        当前操作：选择产品->选择产品->选择产品
+                    </div>
+
+                </div>
+                <div class="widget-body am-fr">
+                    <div style="padding:5px">
+                        <div class="am-form-group">
+                            @*tree*@
+                            <div class="am-u-sm-3">
+                                <ul id="tree" class="ztree" style="width:100%; overflow:auto;"></ul>
+                            </div>
+                            @*tree edit*@
+                            <div class="am-u-sm-9">
+
+                                <div class="am-form-group">
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                        @Html.TextBox("Remark","", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                       @Html.TextBox("Remark", "", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                        @Html.TextBox("Remark", "", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                       @Html.TextBox("Remark", "", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                        @Html.TextBox("Remark", "", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                      @Html.TextBox("Remark", "", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+
+                                </div>
+                                <div class="am-form-group">
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                       @Html.TextBox("Remark", "", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                       @Html.TextBox("Remark", "", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+
+                                    <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                                    <div class="am-u-sm-3">
+                                       @Html.TextBox("Remark", "", new { @class = "tpl-form-input", placeholder = "请输入备注" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-u-sm-7 am-u-sm-push-5">
+                <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("Index")'">返回</button>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenProductId" />
+        <input type="hidden" id="hiddenProdcutName" />
+        <input type="hidden" id="hiddenproductPrice" />
+    </div>
+}
+<script src="~/Scripts/jquery.ztree.all.min.js"></script>
+<script type="text/javascript">
+    var setting = {
+        edit: {
+            enable: false
+        },
+        view: {
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom,
+            dblClickExpand: false,
+            showLine: true,
+            selectedMulti: false
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "pId",
+                rootPId: ""
+            }
+        },
+        callback: {
+            beforeClick: function (treeId, treeNode) {
+
+            }
+        }
+    };
+
+
+
+      $(function(){
+                if("@ViewBag.Msg"!="")
+                    layer.msg("@ViewBag.Msg");
+                InitTree();
+
+            });
+            function InitTree() {
+                var t = $("#tree");
+                
+                var zNodes = @Html.Raw(ViewBag.data);
+
+                t = $.fn.zTree.init(t, setting, zNodes);
+                demoIframe = $("#testIframe");
+                demoIframe.bind("load", loadReady);
+                var zTree = $.fn.zTree.getZTreeObj("tree");
+                zTree.selectNode(zTree.getNodeByParam("id", 101));
+            }
+            function addHoverDom(treeId, treeNode) {
+                var sObj = $("#" + treeNode.tId + "_span");
+                if (treeNode.editNameFlag || $("#addModule_" + treeNode.tId).length > 0|| $("#addProduct_" + treeNode.tId).length > 0) return;
+                var addStr ="";
+                var Last1=$(treeNode.tId).find('ul').length<=0;
+                var Last2=$(treeNode.tId).find('ul ul').length<=0;
+                
+                if($(treeNode.tId).find('ul').length<=0  ){//最后一层
+                    if($(treeNode.tId).attr("isProduct")){//是产品
+
+                    }else{//不是产品
+                        addStr += "<span class='button ico_close' id='addModule_" + treeNode.tId
+                      + "' title='添加模块' onfocus='this.blur();'></span>";
+                        addStr += "<span class='button ico_docu' id='addProduct_" + treeNode.tId
+                      + "' title='添加产品' onfocus='this.blur();'></span>";
+                    } 
+                }else if($(treeNode.tId).find('ul').length>=0 && $(treeNode.tId).find('ul ul').length<=0)//最后第二层
+                {
+                    if($(treeNode.tId).find('[isProduct=false]')>0){//包含模块
+                        addStr += "<span class='button ico_close' id='addModule_" + treeNode.tId
+                        + "' title='添加模块' onfocus='this.blur();'></span>";
+                    }else{
+                        addStr += "<span class='button ico_docu' id='addProduct_" + treeNode.tId
+                     + "' title='添加产品' onfocus='this.blur();'></span>";
+                    }
+                }else{
+                    addStr += "<span class='button ico_close' id='addModule_" + treeNode.tId
+                       + "' title='添加模块' onfocus='this.blur();'></span>";
+                }
+               
+                sObj.after(addStr);
+                var btn = $("#addModule_" + treeNode.tId);
+                if (btn) btn.bind("click", function () {
+
+                });
+            };
+        function removeHoverDom(treeId, treeNode) {
+        $("#addModule_" + treeNode.tId).unbind().remove();
+        $("#addProduct_" + treeNode.tId).unbind().remove();
+        };
+
+        function beforeDrag(treeId, treeNodes) {
+            return false;
+        }
+        function AddRow() {
+            if ($("#Supplier").val().trim() == "") {
+                layer.msg("请先选择供应商！");
+                return;
+            } else {
+            $("#fieldSupplier").find("button").attr("disabled", "disabled");
+            }
+            var length = $("#tb tbody tr").length;
+            var data = "<tr class=\"odd gradeX\">";
+            data+= "<input id=\"PurchaseOrderDetail_"+length+"__ProductId\" name=\"PurchaseOrderDetail["+length+"].ProductId\" type=\"hidden\" value=\"\">";
+            data=data+"<td><input class=\"tpl-form-input\" id=\"PurchaseOrderDetail_"+length+"__ProductName\" name=\"PurchaseOrderDetail["+length+"].ProductName\" onclick=\"openWin(this)\" placeholder=\"请选择产品\" type=\"text\" value=\"\"></td>";
+            data = data + "<td><input class=\"tpl-form-input\" readonly=\"true\" id=\"PurchaseOrderDetail_" + length + "__Price\" name=\"PurchaseOrderDetail[" + length + "].Price\" onkeyup=\"ValidNum(this);\" placeholder=\"\" type=\"text\" value=\"\"></td>";
+            data=data+"<td><input class=\"input_number\" id=\"PurchaseOrderDetail_"+length+"__PurchaseNum\" name=\"PurchaseOrderDetail["+length+"].PurchaseNum\" onkeyup=\"ValidNum(this,true);Cal(this)\" placeholder=\"请输入数量\" type=\"text\" value=\"\"></td>";
+            data = data + "<td><input class=\"tpl-form-input\" readonly=\"true\" id=\"PurchaseOrderDetail_" + length + "__SumPrice\" name=\"PurchaseOrderDetail[" + length + "].SumPrice\" onkeyup=\"ValidNum(this);\" placeholder=\"\" type=\"text\" value=\"\"></td>";
+            data=data+"<td><input class=\"tpl-form-input\" id=\"PurchaseOrderDetail_"+length+"__Remark\" name=\"PurchaseOrderDetail["+length+"].Remark\" placeholder=\"请输入备注\" type=\"text\" value=\"\"></td>";
+            data=data+"<td>";
+            data=data+"<div class=\"tpl-table-black-operation\">";
+            data=data+"<a href=\"#\" class=\"tpl-table-black-operation-del\" onclick=\"DelRow(this)\">";
+            data=data+"<i class=\"am-icon-trash\"></i> 删除";
+            data=data+"</a>";
+            data=data+"</div>";
+            data=data+"</td>";
+            data=data+"</tr>";
+        $("#tb tbody").append(data);
+        }
+        function DelRow(obj) {
+        $(obj).parents("tr").find("[name*='ProductName']").val("");
+        $(obj).parents("tr").find("[name*='Price']").val("0");
+        $(obj).parents("tr").attr("style","display:none");
+            if ($("#tb tbody").find("tr").not("[style]").length <= 0) {
+            $("#fieldSupplier").find("button").removeAttr("disabled");
+            } else {
+            $("#fieldSupplier").find("button").attr("disabled");
+            }
+            CalAll();
+        }
+        function Cal(obj) {
+            var num = $(obj).val();
+            var PurchaseOrderDetail_Price = $(obj).parents("tr").find("[name*='Price']").val();
+            console.log(num);
+            console.log(PurchaseOrderDetail_Price);
+        $(obj).parents("tr").find("[name*='SumPrice']").val(Math.round(parseInt(num) * parseFloat(PurchaseOrderDetail_Price)*100)/100);
+            CalAll();
+        }
+        function CalAll() {
+            var sum = 0;
+        $.each($("#tb tbody tr"), function (index, data) {
+                var PurchaseOrderDetail_Price = $(data).find("[name*='Price']").val();
+                var PurchaseOrderDetail_PurchaseNum = $(data).find("[name*='PurchaseNum']").val();
+
+                sum = Math.round((sum + parseFloat(PurchaseOrderDetail_Price) * parseInt(PurchaseOrderDetail_PurchaseNum))* 100)  / 100;
+            });
+        $("#SumPrice").val(sum);
+        }
+        function openWin(obj) {
+            var SupplierName = $("#Supplier").val();
+            var productNameArr = $("#tb tbody tr").find("[name*='ProductName']");
+            var filter = "";
+        $.each(productNameArr, function (index, data) {
+                filter += $(data).val() + "|";
+            });
+            layer.open({
+                type: 2,
+            title: '选择产品',
+            shadeClose: true,
+            id: "main",
+            shade: true,
+            offset: '100px',
+            shade: 0.8,
+            area: '80%',
+            content: ['@Url.Action("ProductList", "Layer")' + "?SupplierName=" + SupplierName + "&filter=" + filter, 'no'],
+            end: function () {
+                    var hiddenProdcutName = $("#hiddenProdcutName").val();
+                    var hiddenproductPrice = $("#hiddenproductPrice").val();
+                    var hiddenProductId = $("#hiddenProductId").val();
+                    if (hiddenProdcutName == "" || hiddenproductPrice == "" || hiddenProductId == "") return;
+                $("#hiddenProdcutName").val("");
+                $("#hiddenproductPrice").val("");
+                $("#hiddenProductId").val("");
+                $(obj).parents("tr").find("[name*='ProductId']").val(hiddenProductId);
+                $(obj).parents("tr").find("[name*='ProductName']").val(hiddenProdcutName);
+                $(obj).parents("tr").find("[name*='ProductName']").val(hiddenProdcutName);
+                $(obj).parents("tr").find("[name*='Price']").val(hiddenproductPrice);
+                $(obj).parents("tr").find("[name*='PurchaseNum']").val("1");
+                $(obj).parents("tr").find("[name*='SumPrice']").val(hiddenproductPrice);
+                $(obj).parents("tr").find("[name*='Remark']").val("");
+                    CalAll();
+                }
+            });
+        }
+</script>
+

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>沃港后台管理系统</title>
+    <link rel="stylesheet" href="~/Content/Css/amazeui.min.css" />
+    <link rel="stylesheet" href="~/Content/Css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="~/Content/Css/app.css">
+    <link rel="stylesheet" href="~/Content/Css/layer.css">
+
+    <link rel="stylesheet" href="~/Content/Css/webuploader.css">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/ueditor.config.js"></script>
+    <script src="~/scripts/ueditor.all.min.js"></script>
+    <script src="~/scripts/webuploader.min.js"></script>
+    <script src="~/Scripts/layer.js"></script>
+</head>
+<body data-type="index">
+    <script src="~/scripts/theme.js"></script>
+    <div class="am-g tpl-g">
+        <!-- 头部 -->
+        @Html.Action("PartialHead", "Partial")
+
+        <!-- 内容区域 -->
+        <div class="tpl-content-wrapper">
+
+
+            <div class="row-content am-cf">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="http://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="~/scripts/dataTables.responsive.min.js"></script>
+    <script src="~/scripts/app.js"></script>
+    <script type="text/javascript">
+        function ValidNum(obj, xiaoshu) {
+            var reg = "";
+            if (xiaoshu) {
+                reg = new RegExp("^\\d+$");//  /^\d+\.?(\d{1,2})?$/
+            } else {
+                reg = new RegExp("^\\d+\\.?(\\d{1,2})?$");//  /^\d+\.?(\d{1,2})?$/
+            }
+            while (!reg.test($(obj).val()) && $(obj).val() != "") {
+                var str = $(obj).val();
+                str = str.substring(0, str.length - 1)
+                $(obj).val(str);
+            }
+        }
+        $(function () {
+            var arr = location.href.split('/');
+            var actionName = arr[3];
+            $("#nav a[" + actionName + "]").addClass("active").parents("ul").show();
+
+            @*修改*@
+            if ('@ViewBag.Edit' == 'True') {
+                $("[data-role='Edit']").show()
+            } else {
+                $("[data-role='Edit']").hide()
+            }
+            @*删除*@
+            if ('@ViewBag.Delete' == 'True') {
+                $("[data-role='Delete']").show()
+            } else {
+                $("[data-role='Delete']").hide()
+            }
+            @*审批*@
+            if ('@ViewBag.Approve' == 'True') {
+                $("[data-role='Approve']").show()
+            } else {
+                $("[data-role='Approve']").hide()
+            }
+            @*驳回*@
+            if ('@ViewBag.Reject' == 'True') {
+                $("[data-role='Reject']").show()
+            } else {
+                $("[data-role='Reject']").hide()
+            }
+        });
+ 
+
+        @RenderSection("scripts", false)
+    </script>
+</body>
+</html>

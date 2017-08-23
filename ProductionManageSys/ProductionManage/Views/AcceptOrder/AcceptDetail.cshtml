@@ -1,0 +1,191 @@
+﻿@using Service.Model;
+@using ProductionManage.Controllers;
+@model AcceptOrderView
+@{
+    var viewName = "Index";
+}
+<style>
+    .theme-black .tpl-table-black tbody > tr > td {
+        border: 0;
+    }
+</style>
+@using (Html.BeginForm("Save", "AcceptOrder", FormMethod.Post, new { @class = "am-form tpl-form-line-form" }))
+{
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">单头</div>
+                    <div class="widget-function am-fr">
+
+                    </div>
+                </div>
+                <div class="widget-body am-fr">
+                    <div style="padding:5px">
+                        <div class="am-form-group">
+                            @Html.HiddenFor(o => o.ID)
+                            <label for="user-name" class="am-u-sm-1 am-form-label ">验收单号</label>
+                            <div class="am-u-sm-3">
+                                @Html.TextBoxFor(o => (o.AcceptOrderNo), new { @class = "tpl-form-inpu", placeholder = "", @readonly = "true" })
+                            </div>
+                            <label for="user-name" class="am-u-sm-1 am-form-label ">采购单号</label>
+                            <div class="am-u-sm-3">
+                                @Html.TextBoxFor(o => (o.PurchaseOrderNo), new { @class = "tpl-form-inpu", placeholder = "", @readonly = "true" })
+                            </div>
+                            <label for="user-name" class="am-u-sm-1 am-form-label">验收日期</label>
+                            <div class="am-u-sm-3">
+                                @Html.TextBoxFor(o => (o.AcceptDate), new { @class = "tpl-form-inpu", placeholder = "", @readonly = "true" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-1 am-form-label">总金额</label>
+                            <div class="am-u-sm-3">
+                                @Html.TextBoxFor(o => o.SumPrice, new { @class = "", placeholder = "", disabled = "disabled" })
+                            </div>
+                            <label for="user-name" class="am-u-sm-1 am-form-label">备注</label>
+                            <div class="am-u-sm-7">
+                                @Html.TextBoxFor(o => o.Remark, new { @class = "tpl-form-input", placeholder = "" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">单身</div>
+
+                </div>
+                <div class="widget-body am-fr">
+
+                    <div class="am-u-sm-12">
+                        <table class="am-table am-table-compact  tpl-table-black " id="tb">
+                            <thead>
+                                <tr>
+
+                                    <th>产品名称</th>
+                                    <th>单价</th>
+                                    <th>采购数量</th>
+                                    <th>待验收数</th>
+                                    <th>验收数</th>
+                                    <th>验收总金额</th>
+                                    <th>备注</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model?.AcceptOrderDetailView != null)
+                                {
+                                    for (int i = 0; i < Model.AcceptOrderDetailView.Count; i++)
+                                    {
+                                        <tr class="odd gradeX">
+                                            @Html.HiddenFor(o => Model.AcceptOrderDetailView[i].ProductId)
+                                            <td>@Html.TextBoxFor(o => Model.AcceptOrderDetailView[i].ProductName, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "readonly", "true" } })</td>
+                                            <td>@Html.TextBoxFor(o => Model.AcceptOrderDetailView[i].Price, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "readonly", "true" } })</td>
+                                            <td>@Html.TextBoxFor(o => Model.AcceptOrderDetailView[i].PurchaseNum, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "readonly", "true" } })</td>
+                                            <td>@Html.TextBoxFor(o => Model.AcceptOrderDetailView[i].PurchaseNumWait, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "readonly", "true" } })</td>
+                                            <td>@Html.TextBoxFor(o => Model.AcceptOrderDetailView[i].AcceptNum, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "readonly", "true" } })</td>
+                                            <td>@Html.TextBoxFor(o => Model.AcceptOrderDetailView[i].SumPrice, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "readonly", "true" } })</td>
+                                            <td>@Html.TextBoxFor(o => Model.AcceptOrderDetailView[i].Remark, new Dictionary<string, object> { { "class", "tpl-form-input" }, { "placeholder", "" }, { "readonly", "true" } })</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-u-sm-7 am-u-sm-push-5">
+                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("Index")'">返回</button>
+            </div>
+        </div>
+        <input type="hidden" id="hiddenProducts" />
+    </div>
+}
+<script type="text/javascript">
+      $(function(){
+          if("@ViewBag.Msg"!="")
+              layer.msg("@ViewBag.Msg");
+
+
+      });
+    function AddRow(row) {
+
+        var length = $("#tb tbody tr").length;
+
+        var data="<tr class=\"odd gradeX\">"
+        data += "<input id=\"AcceptOrderDetailView_" + length + "__ProductId\" name=\"AcceptOrderDetailView[" + length + "].ProductId\" type=\"hidden\" value=\"" + row.ProductId + "\">"
+        data += "<td><input class=\"tpl-form-input\" id=\"AcceptOrderDetailView_" + length + "__ProductName\" name=\"AcceptOrderDetailView[" + length + "].ProductName\" placeholder=\"\" readonly=\"true\" type=\"text\" value=\"" + row.ProductName + "\"></td>"
+        data += "<td><input class=\"tpl-form-input\" id=\"AcceptOrderDetailView_" + length + "__Price\" name=\"AcceptOrderDetailView[" + length + "].Price\" placeholder=\"\" readonly=\"true\" type=\"text\" value=\"" + row.Price + "\"></td>"
+        data += "<td><input class=\"tpl-form-input\" id=\"AcceptOrderDetailView_" + length + "__PurchaseNum\" name=\"AcceptOrderDetailView[" + length + "].PurchaseNum\" placeholder=\"\" readonly=\"true\" type=\"text\" value=\"" + row.PurchaseNum + "\"></td>"
+        data += "<td><input class=\"tpl-form-input\" data-val=\"true\" data-val-number=\"字段 PurchaseNumWait 必须是一个数字。\" data-val-required=\"PurchaseNumWait 字段是必需的。\" id=\"AcceptOrderDetailView_" + length + "__PurchaseNumWait\" name=\"AcceptOrderDetailView[" + length + "].PurchaseNumWait\" placeholder=\"\" readonly=\"true\" type=\"text\" value=\"" + row.PurchaseNumWait + "\"></td>"
+        data += "<td><input class=\"input_number\" id=\"AcceptOrderDetailView_" + length + "__AcceptNum\" name=\"AcceptOrderDetailView[" + length + "].AcceptNum\" onkeyup=\"ValidNum(this,true);Cal(this)\" placeholder=\"请输入数量\" type=\"text\" value=\"\"></td>"
+        data += "<td><input class=\"tpl-form-input\" id=\"AcceptOrderDetailView_" + length + "__SumPrice\" name=\"AcceptOrderDetailView[" + length + "].SumPrice\" onkeyup=\"ValidNum(this);\" placeholder=\"\" readonly=\"true\" type=\"text\" value=\"0\"></td>"
+        data += "<td><input class=\"tpl-form-input\" id=\"AcceptOrderDetailView_" + length + "__Remark\" name=\"AcceptOrderDetailView[" + length + "].Remark\" placeholder=\"请输入备注\" type=\"text\" value=\"\"></td>"
+        data += "</tr>"
+        $("#tb tbody").append(data);
+    }
+    function Cal(obj) {
+        var num = $(obj).val();
+        if (num == "") {
+            num = 0;
+        }
+        var PurchaseNumWait = $(obj).parents("tr").find("[name*='PurchaseNumWait']").val();
+        if (parseInt(num) > parseInt(PurchaseNumWait)) {
+            str = num.substring(0, num.length - 1)
+            $(obj).val(str);
+            return;
+        }
+
+        var PurchaseOrderDetail_Price = $(obj).parents("tr").find("[name*='Price']").val();
+
+        console.log(PurchaseOrderDetail_Price);
+        $(obj).parents("tr").find("[name*='SumPrice']").val(Math.round(parseInt(num) * parseFloat(PurchaseOrderDetail_Price)*100)/100);
+        CalAll();
+    }
+    function CalAll() {
+        var sum = 0;
+        $.each($("#tb tbody tr"), function (index, data) {
+            var PurchaseOrderDetail_Price = $(data).find("[name*='Price']").val();
+            var PurchaseOrderDetail_PurchaseNum = $(data).find("[name*='AcceptNum']").val();
+            if (PurchaseOrderDetail_PurchaseNum == "") {
+                PurchaseOrderDetail_PurchaseNum = 0;
+            }
+            sum = Math.round((sum + parseFloat(PurchaseOrderDetail_Price) * parseInt(PurchaseOrderDetail_PurchaseNum))* 100)  / 100;
+        });
+        $("#SumPrice").val(sum);
+    }
+    function openWin() {
+
+        layer.open({
+            type: 2,
+            title: '选择采购单',
+            shadeClose: true,
+            id: "main",
+            shade: true,
+            offset: '100px',
+            shade: 0.8,
+            area: '80%',
+            content: ['@Url.Action("PurchaseOrderListForAccept", "Layer")', 'no'],
+            end: function () {
+                var hiddenProdcuts = $("#hiddenProducts").val();
+                if (hiddenProdcuts == "") return;
+                $("#hiddenProducts").val("");
+                var data = JSON.parse(hiddenProdcuts);
+                $("#tb tbody").html("");
+                $.each(data, function (index, row) {
+                    AddRow(row);
+                });
+                $("#SumPrice").val("0");
+
+
+            }
+        });
+    }
+</script>
+

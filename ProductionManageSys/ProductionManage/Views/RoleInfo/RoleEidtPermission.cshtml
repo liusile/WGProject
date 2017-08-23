@@ -1,0 +1,166 @@
+﻿@using Service.Model;
+@using Common;
+<a href="~/Views/RoleInfo/RoleEidtPermission.cshtml">~/Views/RoleInfo/RoleEidtPermission.cshtml</a>
+@model IEnumerable<RolePermission>
+@{
+    var viewName = "Index";
+    var rowStyle = "odd gradeX";
+}
+<div class="row">
+
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+        <div class="widget am-cf">
+            <div class="widget-head am-cf">
+                <div class="widget-title am-fl">编辑权限</div>
+                <div class="widget-function am-fr">
+                    <a href="javascript:;" class="am-icon-cog"></a>
+                </div>
+            </div>
+            <div class="widget-body  am-fr">
+                <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                    <div class="am-form-group">
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <button type="button" class="am-btn am-btn-default am-btn-success" onclick="submit()"><span class="am-icon-paper-plane-o"></span> 提交</button>
+                               
+                            </div>
+                            <div class="am-btn-group am-btn-group-xs">
+                                <button type="button" class="am-btn am-btn-default " onclick="location.href='@Url.Action("Index")'"><span class="am-icon-reply"></span> 返回</button>
+
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+             
+              
+                <div class="am-u-sm-12">
+                    <table class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="">@Html.CheckBox("chkAll", false)<span style="margin-right:5px"></span>模块名称</th>
+                                <th>查阅</th>
+                                <th>删除</th>
+                                <th>编辑</th>
+                                <th>审批</th>
+                                <th>驳回</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in Model)
+                            {
+                                <tr class=@rowStyle>
+                                    <td>@Html.CheckBox("chkRowAll")<span style="margin-right:5px"></span>@row.ModuleName</td>   
+                                    @if (row.View)
+                                    {
+                                        <td>
+                                            @Html.CheckBox("View",row.ViewCheck,new { id = row.ViewID })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }   
+                                    @if (row.Delete)
+                                    {
+                                        <td>@Html.CheckBox("Delete", row.DeleteCheck, new { id = row.DeleteID })</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }   
+                                   @if (row.Edit)
+                                   {
+                                    <td>@Html.CheckBox("Edit", row.EditCheck, new { id = row.EditID })</td>
+                                   }
+                                   else
+                                   {
+                                    <td></td>
+                                   }
+                                
+                                    @if (row.Approve)
+                                    {
+                                        <td>@Html.CheckBox("Approve", row.ApproveCheck, new { id = row.ApproveID })</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }   
+                                    @if (row.Reject)
+                                    {
+                                        <td>@Html.CheckBox("Reject", row.RejectCheck, new { id = row.RejectID })</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                </tr>
+                                rowStyle = "even gradeC";
+                            }
+                        </tbody>
+                    </table>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+      $(function(){
+          if("@TempData["Msg"]"!="")
+              layer.msg("@TempData["Msg"]");
+          $.each($("tr"),function(index,row){
+              if($(this).find(":checkbox").length-1==$(this).find(":checked").length){
+                  $(this).find("[name='chkRowAll']").prop("checked",true);
+              }
+          });
+          if($(":checkbox").length-1==$(":checked").length){
+              $("[name='chkAll']").prop("checked",true);
+          }
+
+          $("[name='chkRowAll']").click(function () {
+              $(this).parents("tr").find(":checkbox").prop("checked", $(this).prop("checked"));
+          });
+          $("[name='chkAll']").click(function () {
+              $(":checkbox").prop("checked", $(this).prop("checked"));
+          });
+          $(":checkbox").not($("[name='chkAll'],[name='chkRowAll']")).click(function () {
+              if($(this).parents("tr").find(":checkbox").not($("[name='chkRowAll']")).length==$(this).parents("tr").find(":checked").not($("[name='chkRowAll']")).length){
+                  $(this).parents("tr").find("[name='chkRowAll']").prop("checked",true);
+              }else{
+                  $(this).parents("tr").find("[name='chkRowAll']").prop("checked",false);
+              }
+              if($(":checkbox").not($("[name='chkAll']")).length==$(":checked").not($("[name='chkAll']")).length){
+                  $("[name='chkAll']").prop("checked",true);
+              }else{
+                  $("[name='chkAll']").prop("checked",false);
+              }
+          });
+
+      });
+
+        function submit() {
+            var chks = $(":checked").not($("[name='chkRowAll'],[name='chkAll']"));
+            var dataarr = {};
+            dataarr["id"]=@ViewBag.id;
+            $.each(chks, function (index, data) {
+                dataarr["a["+index+"]"] = data.id;
+            });
+
+            $.ajax({
+                url: "@Url.Action("SavePermission")",
+                dataType: "json",
+                cache: false,
+                data: dataarr,
+                type: "POST",
+                success: function (data) {
+                    if (data.isSuccess) {
+                        layer.msg(data.Msg);
+                    }
+                    else {
+                        layer.msg(data.Msg);
+                    }
+                }
+        });
+        }
+</script>

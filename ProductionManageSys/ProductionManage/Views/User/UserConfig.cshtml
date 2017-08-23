@@ -1,0 +1,168 @@
+﻿@using Domain.Model;
+@model UserInfo
+@{
+    ViewBag.Title = "UserConfig";
+}
+
+<div class="row">
+
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+        <div class="widget am-cf">
+            <div class="widget-head am-cf">
+                <div class="widget-title am-fl">账号设置</div>
+                <div class="widget-function am-fr">
+                    <a href="javascript:;" class="am-icon-cog"></a>
+                </div>
+            </div>
+            <div class="widget-body am-fr">
+
+                @using (Html.BeginForm("SaveUserConfig", "User", FormMethod.Post, new { @class = "am-form tpl-form-line-form" }))
+                {
+                    @Html.HiddenFor(o => o.ID, new { Value = Model?.ID })
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-u-sm-3 am-form-label">用户名</label>
+                        <div class="am-u-sm-9">
+                            @Html.TextBoxFor(o => o.UserName, new { @class = "tpl-form-input", placeholder = "请输入用户名" })
+                            <small>请填写汉字、字母、数字、下划线组合。</small>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="user-phone" class="am-u-sm-3 am-form-label">角色</label>
+                        <div class="am-u-sm-9">
+                            @Html.DropDownListFor(t => t.RoleID,
+                                ViewBag.selectList as IEnumerable<SelectListItem>,
+                                new { style = "background:#4b5357" })
+                            
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-intro" class="am-u-sm-3 am-form-label">是否生效</label>
+                        <div class="am-u-sm-9">
+                            @Html.CheckBoxFor(o => o.IsValid, new { @class = "ios-switch bigswitch tpl-switch-btn" })
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-intro" class="am-u-sm-3 am-form-label">是否是超级管理员</label>
+                        <div class="am-u-sm-9">
+                            @Html.CheckBoxFor(o => o.IsSuperAdmin, new { @class = "ios-switch bigswitch tpl-switch-btn" })
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-u-sm-3 am-form-label">头像</label>
+                        <div class="am-u-sm-9">
+                            @Html.TextBoxFor(o => o.HeadImgUrl, new { @class = "tpl-form-input", placeholder = "请选择图片" })
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-u-sm-3 am-form-label"></label>
+                        <div class="am-u-sm-9">
+                            <div id="uploader-demo">
+                                <!--用来存放item-->
+                                <div id="fileList" class="uploader-list"></div>
+                                <div id="filePicker1">
+                                    @if (!string.IsNullOrWhiteSpace(Model?.HeadImgUrl))
+                                    {
+                                        <img id="pic1" src="@Model.HeadImgUrl" width="100" />
+                                    }
+                                    else
+                                    {
+                                        <img id="pic1" src="~/Content/Img/photo_icon.png" />
+                                    }
+                                    <span id="UploadStatus1" style="position:absolute;left:0;top:0; width:100%;background:red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-9 am-u-sm-push-3">
+                            <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+      $(function(){
+          if("@ViewBag.Msg"!="")
+              layer.msg("@ViewBag.Msg");
+       });
+</script>
+<script type="text/javascript">
+        //1.
+        $(function(){
+            var uploader = WebUploader.create({
+
+                // 选完文件后，是否自动上传。
+                auto: true,
+
+                // swf文件路径
+                swf: 'https://cdn.staticfile.org/webuploader/0.1.5/Uploader.swf',
+
+                // 文件接收服务端。
+                server: '/Upload/UploadImg',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#filePicker1',
+
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                }
+            });
+            // 当有文件添加进来的时候
+            uploader.on( 'fileQueued', function( file ) {
+                // $list为容器jQuery实例
+
+                // 创建缩略图
+                // 如果为非图片文件，可以不用调用此方法。
+                // thumbnailWidth x thumbnailHeight 为 100 x 100
+                uploader.makeThumb( file, function( error, src ) {
+                    if ( error ) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+                    $("#pic1").attr("src",src)
+                }, 300, 300 );
+            });
+            uploader.on( 'uploadProgress', function( file, percentage ) {
+                var $li = $( '#'+file.id ),
+                $percent = $li.find('.progress span');
+
+                // 避免重复创建
+                if ( !$percent.length ) {
+                    $percent = $('<p class="progress"><span></span></p>')
+                    .appendTo( $li )
+                    .find('span');
+                }
+
+                $percent.css( 'width', percentage * 100 + '%' );
+            });
+
+            // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+            uploader.on('uploadSuccess', function (file, response) {
+                $('#' + file.id).addClass('upload-state-done');
+                if (response.isSuccess) {
+                    $("#HeadImgUrl").val(response.ImgUrl);
+                    $("#UploadStatus1").html('上传成功');
+                }
+            });
+
+            // 文件上传失败，显示上传出错。
+            uploader.on('uploadError', function (file) {
+                $("#UploadStatus1").html('上传失败');
+                $("#HeadImgUrl").val("");
+            });
+
+            // 完成上传完了，成功或者失败，先删除进度条。
+            uploader.on( 'uploadComplete', function( file ) {
+                $( '#'+file.id ).find('.progress').remove();
+            });
+        });
+</script>

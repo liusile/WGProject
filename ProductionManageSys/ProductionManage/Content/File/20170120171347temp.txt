@@ -1,0 +1,9 @@
+测试名称:	SaveTest
+测试全名:	WG_BackStage.Areas.HeadStage.Controllers.Tests.RecruitControllerTests.SaveTest
+测试源:	D:\githubCode\WG_Manage\WG_BackStageTest\Areas\HeadStage\Controllers\RecruitControllerTests.cs:第 22 行
+测试结果:	未通过
+测试持续时间: 	0:00:03.6469509
+
+结果 的堆栈跟踪:	在 WG_BackStage.Areas.HeadStage.Controllers.Tests.RecruitControllerTests.SaveTest() 位置 D:\githubCode\WG_Manage\WG_BackStageTest\Areas\HeadStage\Controllers\RecruitControllerTests.cs:行号 38
+结果 的消息:	Assert.AreEqual 失败。应为: <{ Msg = 申请成功！ } (<>f__AnonymousType0`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]])>，实际为: <{ Msg = 申请成功！ } (<>f__AnonymousType2`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]])>。
+
