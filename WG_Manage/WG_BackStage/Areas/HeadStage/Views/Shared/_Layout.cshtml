@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="沃港 分拣架 智能小车 智能" />
+    <title>广州沃港电子科技有限公司</title>
+   
+    <link href="~/Content/Css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Css/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Css/style.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/Css/font-awesome.css" rel="stylesheet"> 
+    <link href="~/Content/Css/layer.css" rel="stylesheet">
+    <link href='http://fonts.useso.com/css?family=Roboto:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <!----font-Awesome----->
+    <style type="text/css">
+        body, td, th {
+            font-family: Roboto, sans-serif;
+        }
+        body {
+            margin-left: 0px;
+            margin-top: 5px;
+        }
+    </style> 
+</head>
+<body>
+    <!--导航-->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container" style="padding-bottom:0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/HeadStage/Home/Index"><img src="~/Content/Img/logo.jpg" alt="" height="51" /></a>
+            </div>
+            <!--/.navbar-header-->
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px;">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("新闻资讯", "NewsList", "NewsList")
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">产品中心<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("分拣架", "sortingRack", "productlist")</li>
+                            <li>@Html.ActionLink("智能小车", "autoCar", "productlist")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("关于公司", "aboutUs", "aboutUs")
+                    </li>
+                    <li>@Html.ActionLink("人才招聘", "recruit", "recruit")</li>
+                    <li><a href="@Url.Action("Index","Login", new {area="BackStage" })"><span>登录</span></a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!--/.navbar-collapse-->
+    </nav>
+    <!--导航-->
+   
+    @RenderBody()
+    <!--底部-->
+    <div class="footer_bottom" style="margin-top:50px">
+        <div class="container">
+            <div class="col-sm-2">
+                <ul class="f_list2">
+                    <li><a href="jobs.html">关于我们</a></li>
+                    <li><a href="jobs.html">友情链接</a></li>
+                    <li><a href="jobs.html">人才招聘</a></li>
+                    <li><a href="jobs.html">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <ul class="f_list2">
+                    <li><a href="jobs.html">电话：</a></li>
+                    <li><a href="jobs.html">31068310</a></li>
+                    <li><a href="jobs.html">15914396522</a></li>
+                    <li><a href="jobs.html">15914396522</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <ul class="f_list2">
+                    <li><a href="jobs.html">邮箱：</a></li>
+                    <li><a href="jobs.html">1215294451@qq.com</a></li>
+                    <li><a href="jobs.html">1215294451@qq.com</a></li>
+                    <li><a href="jobs.html">1215294451@qq.com</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6 footer_text">
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>地址:广州市番禺区大石街石北工业路644号 巨大创意产业园 15栋C40</p>
+                <p>Copyright 2016 广州沃港科电子技有限公司. All Rights Reserved. 粤ICP备05087808号-1</p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/layer.js"></script>
+</body>
+</html>

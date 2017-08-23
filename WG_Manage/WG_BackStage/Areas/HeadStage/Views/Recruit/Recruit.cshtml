@@ -1,0 +1,55 @@
+﻿@using Domain.Models.HeadStage;
+@model IQueryable<RecruitJob> 
+@{
+    ViewBag.Title = "Recruit";
+}
+<style type="text/css">
+    p {
+        line-height: 2;
+    }
+    .recruit {
+        margin-bottom: 20px;
+    }
+</style>
+<div class="banner_1">
+    <img src="~/Content/Img/banner_1.jpg" style="width:100%;" />
+</div>
+<div class="container">
+    <div class="single"><h2>企业招聘</h2> </div>
+    <div class="short_codes">
+        <div class="row">
+        @foreach (var row in Model)
+        {
+            <div class="col-md-6 recruit">
+                <article class="headings">
+                    <h3 align="center">@row.JobName</h3>
+                    <p>&nbsp;</p>
+                    <h4>任职要求：</h4>
+                    <p>@row.Condition1</p>
+                    <p>@row.Condition2</p>
+                    <p>@row.Condition3</p>
+                    <p>@row.Condition4</p>
+                    <p>@row.Condition5</p>
+                    <p>&nbsp;</p>
+                    <h4>职位描述：</h4>
+                    <p>@row.JobDetail1</p>
+                    <p>@row.JobDetail2</p>
+                    <p>@row.JobDetail3</p>
+                    <p>@row.JobDetail4</p>
+                    <p>@row.JobDetail5</p>
+                    <p>&nbsp;</p>
+                    <h4>工作地址：</h4>
+                    <p>@row.Address</p>
+                </article>
+            </div>
+        }
+        </div>
+
+        <div class="clearfix"> </div>
+    </div>
+    <div class="btn-group btn-group-justified" style="margin:30px 0">
+        <div class="btn-group" role="group" style="width:100%">
+            @Html.ActionLink("加入我们", "AddTeam", null, new { @class = "btn btn-primary btn-lg " })
+        </div>
+    </div>
+</div>

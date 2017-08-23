@@ -1,0 +1,120 @@
+﻿@using Domain.Models.HeadStage;
+@model RecruitJob
+
+   
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">编辑招聘职位</div>
+                    <div class="widget-function am-fr">
+                        <a href="javascript:;" class="am-icon-cog"></a>
+                    </div>
+                </div>
+                <div class="widget-body am-fr">
+                        @using (Html.BeginForm("Save", "Job", FormMethod.Post, new { @class = "am-form tpl-form-line-form" }))
+                        {
+                        @Html.HiddenFor(o => o.ID,new { Value=Model?.ID})
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">招聘职位</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.JobName, new { @class = "tpl-form-input", placeholder = "请输入招聘职位" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-3 am-form-label">排序</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Seq, new { @class = "tpl-form-input", placeholder = "请输入排序" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-intro" class="am-u-sm-3 am-form-label">是否启用</label>
+                            <div class="am-u-sm-9">
+                                @Html.CheckBoxFor(o => o.isValid, new { @class = "ios-switch bigswitch tpl-switch-btn" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">任职要求1</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Condition1, new { @class = "tpl-form-input", placeholder = "请输入任职要求" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">任职要求2</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Condition2, new { @class = "tpl-form-input", placeholder = "请输入任职要求" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">任职要求3</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Condition3, new { @class = "tpl-form-input", placeholder = "请输入任职要求" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">任职要求4</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Condition4, new { @class = "tpl-form-input", placeholder = "请输入任职要求" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">任职要求5</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Condition5, new { @class = "tpl-form-input", placeholder = "请输入任职要求" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">职位描述1</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.JobDetail1, new { @class = "tpl-form-input", placeholder = "请输入职位描述" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">职位描述2</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.JobDetail2, new { @class = "tpl-form-input", placeholder = "请输入职位描述" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">职位描述3</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.JobDetail3, new { @class = "tpl-form-input", placeholder = "请输入职位描述" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">职位描述4</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.JobDetail4, new { @class = "tpl-form-input", placeholder = "请输入职位描述" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">职位描述5</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.JobDetail5, new { @class = "tpl-form-input", placeholder = "请输入职位描述" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">工作地址</label>
+                            <div class="am-u-sm-9">
+                                @Html.TextBoxFor(o => o.Address, new { @class = "tpl-form-input", placeholder = "请输入工作地址" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("RecruitJobList")'">返回</button>
+                            </div>
+                        </div>
+                        }
+                </div>
+            </div>
+        </div>
+    </div>
+   <script type="text/javascript">
+      $(function(){
+          if("@ViewBag.Msg"!="")
+              layer.msg("@ViewBag.Msg");
+       });
+   </script>
+
+

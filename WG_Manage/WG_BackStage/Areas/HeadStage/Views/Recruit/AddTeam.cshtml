@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "AddTeam";
+}
+<div class="container">
+    <div class="single"><h2>留言板</h2> </div>
+    @using (Html.BeginForm("Save", "Recruit", FormMethod.Post, new { @class = "form-horizontal",id="form1" }))
+    {
+
+        <div class="form-group">
+            <label for="txt_Name" class="col-xs-2 control-label">姓名：</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" name="Name" id="txt_Name" placeholder="请输入姓名">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txt_Age" class="col-xs-2 control-label">年龄：</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control " name="Age" id="txt_Age" placeholder="请输入年龄">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txt_Email" class="col-xs-2 control-label">邮箱：</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" name="Email" id="txt_Email" placeholder="请输入邮箱">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txt_ApplyJob" class="col-xs-2 control-label">职位：</label>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" name="ApplyJobName" id="txt_ApplyJob" placeholder="请输入职位">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txt_Talk" class="col-xs-2 control-label">留言：</label>
+            <div class="col-xs-10">
+                <textarea class="form-control" rows="20" name="Talk" id="txt_Talk" placeholder="请输入留言" style="width:100%"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txt_Talk" class="col-xs-2 control-label"></label>
+            <div class="col-xs-10">
+                <button id="ok" type="button" class="btn btn-primary btn-block" onclick="Submit()">提交</button>
+            </div>
+        </div>
+    }
+</div>
+<script>
+
+    function Submit() {
+        $.ajax({
+            url: "/WG_BackStage/HeadStage/Recruit/Save",
+            dataType: "json",
+            cache: false,
+            data: $("#form1").serialize(),
+            type: "POST",
+            success: function (data) {
+                if (data.IsSuccess) {
+                    layer.msg(data.Msg);
+                    $("#ok").prop("disabled", true);
+                }else{
+                    layer.msg(data.Msg);
+                }
+            }
+        });
+    }
+</script>

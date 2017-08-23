@@ -1,0 +1,86 @@
+﻿@using Domain.Models.HeadStage;
+@model Product
+@{
+    ViewBag.Title = "AutoCar";
+}
+<style type="text/css">
+    p {
+        line-height: 2;
+    }
+</style>
+<div class="banner_1">
+    <img src="~/Content/Img/banner_1.jpg" style="width:100%;" />
+</div>
+<div class="container">
+    <div class="single"><h2>@Model.Name</h2> </div>
+    <h3><img src="~/Content/Img/tagLine.jpg" style="height:20px;padding-right:5px">产品介绍</h3>
+    <p>
+        @Model.Describe
+    </p>
+    <p>&nbsp;</p>
+    <h3><img src="~/Content/Img/tagLine.jpg" style="height:20px;padding-right:5px">使用说明</h3>
+    <p>
+        @Model.Instructions
+    </p>
+    <p>&nbsp;</p>
+    <h3><img src="~/Content/Img/tagLine.jpg" style="height:20px;padding-right:5px">产品展示</h3>
+    <div class="container" style="margin-left:-15px">
+        <div>
+            <div>
+                @if (!string.IsNullOrWhiteSpace(Model.ImgUrl1))
+                {
+                    <div class="col-sm-3 recruit">
+                        <a>
+                            <img src=@Model.ImgUrl1 class="img-responsive img-rounded" alt="" />
+                            <h4>@Model.ImgDescribe1</h4>
+                        </a>
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.ImgUrl2))
+                {
+                    <div class="col-sm-3 recruit">
+                        <a>
+                            <img src=@Model.ImgUrl2 class="img-responsive img-rounded" alt="" />
+                            <h4>@Model.ImgDescribe2</h4>
+                        </a>
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.ImgUrl3))
+                {
+                    <div class="col-sm-3 recruit">
+                        <a>
+                            <img src=@Model.ImgUrl3 class="img-responsive img-rounded" alt="" />
+                            <h4>@Model.ImgDescribe3</h4>
+                        </a>
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.ImgUrl4))
+                {
+                    <div class="col-sm-3 recruit">
+                        <a>
+                            <img src=@Model.ImgUrl4 class="img-responsive img-rounded" alt="" />
+                            <h4>@Model.ImgDescribe4</h4>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <p>&nbsp;</p>
+    <h3><img src="~/Content/Img/tagLine.jpg" style="height:20px;padding-right:5px">性能参数</h3>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>参数</th>
+            </tr>
+        </thead>
+        @foreach (var row in Model.ProductAttributeList)
+            {
+            <tr><td>@row.AtrName</td><td>@row.AtrValue</td></tr>
+        }
+    </table>
+
+</div>
+

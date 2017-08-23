@@ -1,0 +1,42 @@
+﻿@using Domain.Models.HeadStage;
+@model IQueryable<Employee> 
+<style type="text/css">
+    p {
+        line-height: 2;
+    }
+</style> 
+@{
+    ViewBag.Title = "AboutUs";
+}
+
+<div class="banner_1">
+    <img src="~/Content/Img/banner_1.jpg" style="width:100%;" />
+</div>
+<div class="container">
+    <div class="single"><h2>关于公司</h2> </div>
+    <h3><img src="~/Content/Img/tagLine.jpg" style="height:20px;padding-right:5px">公司简介</h3>
+    <p>
+       @ViewBag.Generalization
+    </p>
+    <p>&nbsp;</p>
+    <h3><img src="~/Content/Img/tagLine.jpg" style="height:20px;padding-right:5px">企业文化</h3>
+    <p>@ViewBag.Culture</p>
+    <p>&nbsp;</p>
+    <h3><img src="~/Content/Img/tagLine.jpg" style="height:20px;padding-right:5px">员工精采</h3>
+    <div class="container" style="margin-left:-15px">
+        <div>
+            <div>
+                @foreach (var row in Model)
+                {
+                    <div class="col-sm-3 recruit">
+                        <a href="following.html">
+                            <img src="@row.ImgUrl" class="img-responsive img-rounded " alt="" />
+                            <h4>@row.Describe</h4>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

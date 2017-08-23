@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "应用程序", "应用程序", "{069B981E-822C-412F-9133-70EA39602BF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "应用服务", "应用服务", "{8F143A28-AF96-499B-8236-5136FF89FE57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "应用类库", "应用类库", "{DFBE5F19-8598-4B97-A9AA-6582CE9A4456}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E8A29615-9B42-4F93-8C84-70C5C22E6DBD}"
+	ProjectSection(SolutionItems) = preProject
+		readme.txt = readme.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{671689A9-EBE7-4E89-B7C0-24BD79AA6873}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WG_BackStage", "WG_BackStage\WG_BackStage.csproj", "{0C8F5E88-1172-4911-B9DD-AAFA8E9475E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "测试项目", "测试项目", "{ABDE8E84-C378-45B2-86F2-B55717C65B0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WG_BackStageTest", "WG_BackStageTest\WG_BackStageTest.csproj", "{FD0A850D-B3CC-4FA4-A7F7-2A58196D24EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{7AC57A1B-6E63-47CB-828E-D77601CAFF45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{2800AFF6-C3A9-4B44-8F68-69C804AFFC82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{671689A9-EBE7-4E89-B7C0-24BD79AA6873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{671689A9-EBE7-4E89-B7C0-24BD79AA6873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{671689A9-EBE7-4E89-B7C0-24BD79AA6873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{671689A9-EBE7-4E89-B7C0-24BD79AA6873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8F5E88-1172-4911-B9DD-AAFA8E9475E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8F5E88-1172-4911-B9DD-AAFA8E9475E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8F5E88-1172-4911-B9DD-AAFA8E9475E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8F5E88-1172-4911-B9DD-AAFA8E9475E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD0A850D-B3CC-4FA4-A7F7-2A58196D24EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD0A850D-B3CC-4FA4-A7F7-2A58196D24EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD0A850D-B3CC-4FA4-A7F7-2A58196D24EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD0A850D-B3CC-4FA4-A7F7-2A58196D24EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC57A1B-6E63-47CB-828E-D77601CAFF45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC57A1B-6E63-47CB-828E-D77601CAFF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC57A1B-6E63-47CB-828E-D77601CAFF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC57A1B-6E63-47CB-828E-D77601CAFF45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2800AFF6-C3A9-4B44-8F68-69C804AFFC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2800AFF6-C3A9-4B44-8F68-69C804AFFC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2800AFF6-C3A9-4B44-8F68-69C804AFFC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2800AFF6-C3A9-4B44-8F68-69C804AFFC82}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{671689A9-EBE7-4E89-B7C0-24BD79AA6873} = {DFBE5F19-8598-4B97-A9AA-6582CE9A4456}
+		{0C8F5E88-1172-4911-B9DD-AAFA8E9475E9} = {069B981E-822C-412F-9133-70EA39602BF2}
+		{FD0A850D-B3CC-4FA4-A7F7-2A58196D24EA} = {ABDE8E84-C378-45B2-86F2-B55717C65B0D}
+		{7AC57A1B-6E63-47CB-828E-D77601CAFF45} = {8F143A28-AF96-499B-8236-5136FF89FE57}
+		{2800AFF6-C3A9-4B44-8F68-69C804AFFC82} = {8F143A28-AF96-499B-8236-5136FF89FE57}
+	EndGlobalSection
+EndGlobal

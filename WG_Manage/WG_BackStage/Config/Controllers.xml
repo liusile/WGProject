@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <description>Spring注入控制器，容器指向Service层封装的接口</description>
+  <!-- **********************************************************官网前台********************************************************** -->
+  <!--用户管理-->
+  <object  type="WG_BackStage.Areas.BackStage.Controllers.LoginController,WG_BackStage" singleton="false">
+    <property name="UserInfoBz" ref="Service.UserInfo"/>
+  </object>
+  <!--申请职位-->
+  <object type="WG_BackStage.Areas.HeadStage.Controllers.RecruitController,WG_BackStage" singleton="false">
+    <property name="ApplyJobBz" ref="Service.ApplyJob"/>
+    <property name="RecruitJobBz" ref="Service.RecruitJob"/>
+  </object>
+  <!--关于公司-->
+  <object  type="WG_BackStage.Areas.HeadStage.Controllers.AboutUsController,WG_BackStage" singleton="false">
+    <property name="CompanyBz" ref="Service.Company"/>
+    <property name="EmployeeBz" ref="Service.Employee"/>
+  </object>
+  <!--新闻-->
+  <object  type="WG_BackStage.Areas.HeadStage.Controllers.NewsListController,WG_BackStage" singleton="false">
+    <property name="NewsBz" ref="Service.News"/>
+  </object>
+  <!--产品-->
+  <object  type="WG_BackStage.Areas.HeadStage.Controllers.ProductListController,WG_BackStage" singleton="false">
+    <property name="ProductBz" ref="Service.Product"/>
+  </object>
+  <!-- **********************************************************官网后台********************************************************** -->
+  <object  type="WG_BackStage.Areas.BackStage.Controllers.JobController,WG_BackStage" singleton="false">
+    <property name="RecruitJobBz" ref="Service.RecruitJob"/>
+    <property name="ApplyJobBz" ref="Service.ApplyJob"/>
+  </object>
+  <object  type="WG_BackStage.Areas.BackStage.Controllers.AboutUsController,WG_BackStage" singleton="false">
+    <property name="CompanyBz" ref="Service.Company"/>
+    <property name="EmployeeBz" ref="Service.Employee"/>
+  </object>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!--BaseController-->
+  <!--<object  type="WG_BackStage.Areas.BackStage.Controllers.BaseController,WG_BackStage" singleton="false">
+    <property name="UserInfoBz" ref="Service.UserInfo"/>
+  </object>-->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</objects>

@@ -1,0 +1,20 @@
+﻿@using Domain.Models.HeadStage;
+@model News
+<style type="text/css">
+    .back {
+       color:black;
+      text-decoration:none;
+    }
+</style> 
+@{
+    ViewBag.Title = "NewsDetail";
+}
+
+<h2 class="text-center" style="margin:50px 0">@Model.Title</h2>
+
+<!--新闻详情  开始-->
+<div class="container">
+    @Html.Raw(@Model.Content)
+    <!--新闻详情  end-->
+    <p class="text-right" style="margin-right:20px"><img src="~/Content/Img/back.png" width="20px" />@Html.ActionLink("返回", "NewsList", null, new { @class = "back" })</p>
+</div>

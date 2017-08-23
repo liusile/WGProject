@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <description>Spring注入Service，容器指向本层层封装的接口，舍弃Dao层，减少代码量</description>
+  <!--通用资料上传管理-->
+  <object id="Service.UserInfo" type="Service.ServiceImp.BackStage.UserInfoManage,Service" singleton="false"></object>
+  <object id="Service.ApplyJob" type="Service.ServiceImp.HeadStage.ApplyJob,Service" singleton="false"></object>
+  <object id="Service.RecruitJob" type="Service.ServiceImp.HeadStage.RecruitJob,Service" singleton="false"></object>
+  <object id="Service.Employee" type="Service.ServiceImp.HeadStage.Employee,Service" singleton="false"></object>
+  <object id="Service.Company" type="Service.ServiceImp.HeadStage.Company,Service" singleton="false"></object>
+  <object id="Service.News" type="Service.ServiceImp.HeadStage.News,Service" singleton="false"></object>
+  <object id="Service.Product" type="Service.ServiceImp.HeadStage.Product,Service" singleton="false"></object>
+</objects>

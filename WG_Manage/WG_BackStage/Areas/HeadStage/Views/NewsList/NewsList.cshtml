@@ -1,0 +1,37 @@
+﻿@using Domain.Models.HeadStage;
+@using Common;
+@model PageInfo<News>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="banner_1" >
+    <img  src="~/Content/Img/banner_1.jpg" style="width:100%;"/>  
+</div>
+<div class="container">
+    <div class="single"><h2>新闻资讯</h2> </div>
+    @foreach (var row in Model.List)
+    {
+        <div class="tab_grid">
+            <div class="jobs-item with-thumb">
+                <div class="thumb"><a href=@Url.Action("NewsDetail", new { id = row.ID })><img src="@row.ImgUrl" class="img-responsive" alt="" /></a></div>
+                <div class="jobs_right">
+                    <div class="date">@row.Day <span>@row.Month</span></div>
+                    <div class="date_desc">
+                        <h6 class="title"><a href=@Url.Action("NewsDetail", new { id = row.ID })>@row.Title</a></h6>
+                        <span class="meta">@row.KeyWord</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ul class="top-btns">
+                        <li><a href="#" class="fa fa-plus toggle"></a></li>
+                        <li><a href="#" class="fa fa-star"></a></li>
+                        <li><a href="#" class="fa fa-link"></a></li>
+                    </ul>
+                    <p class="description">@row.summary<a href=@Url.Action("NewsDetail", new { id = row.ID }) class="read-more">详细</a></p>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    }
+   
+</div>
+

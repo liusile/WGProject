@@ -1,0 +1,81 @@
+﻿@using Domain.Models.HeadStage;
+@model ApplyJob
+
+<div class="row">
+    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+        <div class="widget am-cf">
+            <div class="widget-head am-cf">
+                <div class="widget-title am-fl">应聘职位详情</div>
+                <div class="widget-function am-fr">
+                    <a href="javascript:;" class="am-icon-cog"></a>
+                </div>
+            </div>
+            <div class="widget-body am-fr">
+                @using (Html.BeginForm("", "Job", FormMethod.Post, new { @class = "am-form tpl-form-line-form" }))
+                {
+                    @Html.HiddenFor(o => o.ID, new { Value = Model?.ID })
+                    <div class="am-form-group">
+                        <label for="user-name" class="am-u-sm-3 am-form-label">应聘职位</label>
+                        <div class="am-u-sm-9">
+                            @Html.Label(Model.ApplyJobName, new { @class = "tpl-form-input", placeholder = "无" })
+                        </div>
+                    </div>
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-3 am-form-label">姓名</label>
+                            <div class="am-u-sm-9">
+                                @Html.Label(Model.Name, new { @class = "tpl-form-input", placeholder = "无" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-intro" class="am-u-sm-3 am-form-label">年龄</label>
+                            <div class="am-u-sm-9">
+                                @Html.Label(Model.Age, new { @class = "tpl-form-input" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">邮箱</label>
+                            <div class="am-u-sm-9">
+                                @Html.Label(Model.Email, new { @class = "tpl-form-input", placeholder = "无" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">申请时间</label>
+                            <div class="am-u-sm-9">
+                                @Html.Label(Model.ApplyTime, new { @class = "tpl-form-input", placeholder = "无" })
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">说明</label>
+                            <div class="am-u-sm-9">
+                                @Html.Label(Model.Talk, new { @class = "tpl-form-input", placeholder = "无" })
+                            </div>
+                        </div>
+                       
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                @if (Model.Status == 1)
+                                {
+                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("ApplyJobBack",new { id=Model.ID})'">驳回</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("ApplyJobApprove",new { id=Model.ID})'">审批</button>
+                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("ApplyJobDel",new { id=Model.ID})'">删除</button>
+                                }
+                                
+                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="location.href='@Url.Action("AppJobList")'">返回</button>
+                            </div>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+      $(function(){
+          if("@ViewBag.Msg"!="")
+              layer.msg("@ViewBag.Msg");
+       });
+</script>
+
+
