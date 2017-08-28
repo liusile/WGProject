@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderSortingBy50", "OrderSortingBy50\OrderSortingBy50.csproj", "{4B7A6372-1852-4838-B0DF-840EA1F4FA67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C7B5AA34-08F9-4A9D-9183-03B8B4F0456D}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.txt = ReadMe.txt
+		RemarkCode.txt = RemarkCode.txt
+		solution Items\上位机与下位机通讯协议.doc = solution Items\上位机与下位机通讯协议.doc
+		solution Items\分拣架说明书.doc = solution Items\分拣架说明书.doc
+		C:\Users\Administrator\Desktop\工作任务\分拨墙\分拨墙对接接口-整理.doc = C:\Users\Administrator\Desktop\工作任务\分拨墙\分拨墙对接接口-整理.doc
+		C:\Users\Administrator\Desktop\工作任务\分拨墙\分拨墙订单数据对接接口.doc = C:\Users\Administrator\Desktop\工作任务\分拨墙\分拨墙订单数据对接接口.doc
+		C:\Users\Administrator\Desktop\工作任务\分拨墙\分播墙串口协议.doc = C:\Users\Administrator\Desktop\工作任务\分拨墙\分播墙串口协议.doc
+		solution Items\分播墙开发文档.docx = solution Items\分播墙开发文档.docx
+		solution Items\分播墙需求说明书V2.0.docx = solution Items\分播墙需求说明书V2.0.docx
+		solution Items\分播墙需求说明书V3.0.docx = solution Items\分播墙需求说明书V3.0.docx
+		solution Items\分波墙通讯协议(作废).xlsx = solution Items\分波墙通讯协议(作废).xlsx
+		solution Items\广州棒谷DAS使用说明书.docx = solution Items\广州棒谷DAS使用说明书.docx
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{D16AD671-A20B-486F-9FCC-2DE911059F8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{05488305-E888-4FD6-A898-7A4B180FC95E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{21BD6064-5F66-47F4-B577-F1CC78E7C052}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomTask", "Task\CustomTask.csproj", "{F8F75357-3BA0-43BD-B504-BF3C34BB7C3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B7A6372-1852-4838-B0DF-840EA1F4FA67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B7A6372-1852-4838-B0DF-840EA1F4FA67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B7A6372-1852-4838-B0DF-840EA1F4FA67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B7A6372-1852-4838-B0DF-840EA1F4FA67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D16AD671-A20B-486F-9FCC-2DE911059F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D16AD671-A20B-486F-9FCC-2DE911059F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D16AD671-A20B-486F-9FCC-2DE911059F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D16AD671-A20B-486F-9FCC-2DE911059F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05488305-E888-4FD6-A898-7A4B180FC95E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05488305-E888-4FD6-A898-7A4B180FC95E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05488305-E888-4FD6-A898-7A4B180FC95E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05488305-E888-4FD6-A898-7A4B180FC95E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21BD6064-5F66-47F4-B577-F1CC78E7C052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21BD6064-5F66-47F4-B577-F1CC78E7C052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21BD6064-5F66-47F4-B577-F1CC78E7C052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21BD6064-5F66-47F4-B577-F1CC78E7C052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F75357-3BA0-43BD-B504-BF3C34BB7C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F75357-3BA0-43BD-B504-BF3C34BB7C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F75357-3BA0-43BD-B504-BF3C34BB7C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F75357-3BA0-43BD-B504-BF3C34BB7C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

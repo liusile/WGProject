@@ -1,0 +1,37 @@
+            //Invoke((MethodInvoker)delegate()
+            //{
+            //    ButtonService.UpdateButton(SlaveInfoService.GetLatticeInfoList(upDownMessage));
+            //});  
+
+
+
+
+		    //var slaveInfo = SlaveInfoService.GetSlaveInfo(o=>o.WaveNo == waveNo);
+            //if (slaveInfo.IsComplete)
+            //{
+            //    UpDownService.WaveOverError(waveNo);
+            //    return;
+            //}
+
+            //var slave = SlaveInfoService.GetSlaveInfo(o => o.WaveNo == waveApi.WaveNo && o.IsWorkIng);
+            //if (slave == null)
+            //{
+            //    LogHelper.Save($"波次号数据不同步：{waveApi.WaveNo}");
+            //    return;
+            //}
+            //var result = MessageBox.Show($"波次:{waveApi.WaveNo}未分拣完，是否继续？", "提示", MessageBoxButtons.OKCancel);
+            //if (result == DialogResult.OK)
+            //{
+            //    UpDownService.BeginSort(slave);
+            //    ButtonService.UpdateButtons();
+            //}
+            //else
+            //{
+            //    SlaveInfoService.DeleteSlaveInfo(slave);
+            //}
+            //return;
+            //if (waveApi.Status == WaveStatus.Complete)
+            //{
+            //    lblMsg.Text = string.Format(Resources.WaveCompleteError, waveNo);
+            //    return;
+            //}
