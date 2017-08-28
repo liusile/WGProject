@@ -14,7 +14,6 @@ namespace WG_BackStage.Areas.HeadStage.Controllers.Tests
         [TestMethod()]
         public void SaveTest()
         {
-            job
             Assert.Fail();
         }
     }
